@@ -13,7 +13,7 @@
     <div class="container" style="border-bottom: 2px solid blue; background-color: #F5F5F5">
       <h1 class="h5 my-0 me-md-auto fw-bold" style="padding-top: 10px">Блог</h1>
       <nav class="navbar navbar-light bg-faded">
-        <ul class="nav navbar-nav">
+        <ul class="nav">
           <li class="nav-item active">
             <a class="nav-link" href="<%= posts_path %>">Статьи</a>
           </li>
@@ -26,6 +26,15 @@
     </div>
 
     <div class="container main">
+      <div class="row">
+        <div class="col-md-12">
+          <% flash.each do |name, message| %>
+            <div class="alert alert-<%= name %>">
+              <%= message %>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <%= yield %>
     </div>
   </body>

@@ -28,10 +28,10 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post }
+        format.html { redirect_to @post, success: 'Статья успешно обновлена' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { render :new }
+        format.html { render :new, danger: 'Статья не обновлена' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -41,11 +41,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post }
+      if @post.update_attributes(post_params)
+        format.html { redirect_to @post, success: 'Статья успешно обновлена' }
         format.json { render :show, status: :ok, location: @post }
       else
-        format.html { render :edit }
+        format.html { render :edit, danger: 'Статья не обновлена' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +69,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :summary, :body)
+      params.require(:post).permit(:title, :summary, :body, :image)
     end
 end

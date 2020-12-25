@@ -8,8 +8,11 @@
     </smal>
   </section>
 
-  <section>
-    <%= @post.body %>
+  <section class="post-body">
+  	<%= image_tag @post.image.url(:large), class: 'img-show' if @post.image? %>
+    <%= @post.body.html_safe %>
   </section>
 </article>
+
+<%= link_to 'Back', posts_path %>
 <br>

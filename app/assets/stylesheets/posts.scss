@@ -7,12 +7,21 @@ article.post {
   padding: 1em 0;
   border-bottom: 1px solid;
   h2, h1 {
-  	margin-bottom: 0
+  	margin-bottom: 0;
   }
   section.post-summary {
-  	padding: .5em 0
+  	padding: .5em 0;
   }
   section.post-body {
-  	padding-top: 1em
+  	padding-top: 1em;
+  }
+  .img-show {
+    display: block;
+    padding-top: 1em;
+    margin-bottom: 2em;
+  }
+  .thumb {
+    float: left;
+    margin-right: 1em;
   }
 }
