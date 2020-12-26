@@ -1,5 +1,5 @@
 class Admin::PostsController < Admin::AdminController
-  before_action :set_post, only: [:edit, :update, :destroy]
+  before_action :set_post, only: %i[edit update destroy]
 
   # GET /posts/new
   def new
@@ -7,8 +7,7 @@ class Admin::PostsController < Admin::AdminController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts
   # POST /posts.json
@@ -18,11 +17,11 @@ class Admin::PostsController < Admin::AdminController
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, success: 'Статья успешно обновлена' }
-        #format.json { render :show, status: :created, location: @post }
+        # format.json { render :show, status: :created, location: @post }
       else
         flash.now[:danger] = 'Статья не обновлена'
         format.html { render :new }
-        #format.json { render json: @post.errors, status: :unprocessable_entity }
+        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -31,13 +30,13 @@ class Admin::PostsController < Admin::AdminController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.update_attributes(post_params)
+      if @post.save
         format.html { redirect_to @post, success: 'Статья успешно обновлена' }
-        #format.json { render :show, status: :ok, location: @post }
+        # format.json { render :show, status: :ok, location: @post }
       else
         flash.now[:danger] = 'Статья не обновлена'
         format.html { render :edit }
-        #format.json { render json: @post.errors, status: :unprocessable_entity }
+        # format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,13 +52,14 @@ class Admin::PostsController < Admin::AdminController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:title, :summary, :body, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:title, :summary, :body, :image)
+  end
 end
