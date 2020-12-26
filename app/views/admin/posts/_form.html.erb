@@ -2,7 +2,7 @@
   <div class="alert alert-danger">
     <h5><%= t('common.errors') %><h5>
     <ul>
-      <%= @post.errors.full_messages.each do |message| %>
+      <% @post.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
     </ul>

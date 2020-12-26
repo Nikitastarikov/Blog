@@ -15,7 +15,7 @@ class Admin::PostsController < Admin::AdminController
     @post = Post.new(post_params)
 
     respond_to do |format|
-      if @post.save
+      if @post.update(post_params)
         format.html { redirect_to @post, success: 'Статья успешно обновлена' }
         # format.json { render :show, status: :created, location: @post }
       else
@@ -30,7 +30,7 @@ class Admin::PostsController < Admin::AdminController
   # PATCH/PUT /posts/1.json
   def update
     respond_to do |format|
-      if @post.save
+      if @post.update(post_params)
         format.html { redirect_to @post, success: 'Статья успешно обновлена' }
         # format.json { render :show, status: :ok, location: @post }
       else
