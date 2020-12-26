@@ -3,7 +3,8 @@ class Admin::PostsController < Admin::AdminController
 
   # GET /posts/new
   def new
-    @post = Post.new
+    #params[:user_id] = current_user.id
+    @post = current_user.posts.build
   end
 
   # GET /posts/1/edit
@@ -12,7 +13,7 @@ class Admin::PostsController < Admin::AdminController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.build(post_params)
 
     respond_to do |format|
       if @post.update(post_params)
@@ -60,6 +61,6 @@ class Admin::PostsController < Admin::AdminController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :summary, :body, :image)
+    params.require(:post).permit(:title, :summary, :body, :image, :user_id)
   end
 end
