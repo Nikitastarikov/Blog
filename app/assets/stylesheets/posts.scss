@@ -6,6 +6,9 @@ article.post {
   margin-bottom: 1em;
   padding: 1em 0;
   border-bottom: 1px solid;
+  img {
+    max-width: 100%
+  }
   h2, h1 {
   	margin-bottom: 0;
   }
