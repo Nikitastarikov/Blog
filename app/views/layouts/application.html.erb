@@ -12,12 +12,17 @@
   <body>
     <div class="container" style="border-bottom: 2px solid blue; background-color: #F5F5F5">
 
-      <h1 class="navbar-brand" href="#">Блог</h1>
+      <h1 class="navbar-brand" href="#">VebBlog</h1>
       <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
 
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto justify-content-md-between">
           <li class="nav-item active">
             <a class="nav-link" href="<%= root_path %>">All articles</a>
+          </li>
+          <li class="nav-item active">
+            <% if user_signed_in? %>
+              <%= link_to 'new article', new_admin_post_path, class: 'btn btn-outline-primary pull-sm' %>
+            <% end %>
           </li>
         </ul>
 

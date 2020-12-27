@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root 'posts#index'
   get '/profiles/:id' => 'profiles#show', as: "profile"
 
-  resources :posts, only: %i[show index]
+  resources :posts
 
   namespace :admin do
     resources :posts, except: %i[show index]
