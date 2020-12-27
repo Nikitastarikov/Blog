@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   end
 
   def show; end
-  
+
   def new
     @post = current_user.posts.build
   end
@@ -51,14 +51,15 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url }
+      format.html { redirect_to root_path }
       format.json { head :no_content }
     end
+    redirect_to root_path
   end
 
   private
 
-   # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
   end

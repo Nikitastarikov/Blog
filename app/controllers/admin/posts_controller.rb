@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::AdminController
 
   # GET /posts/new
   def new
-    #params[:user_id] = current_user.id
+    # params[:user_id] = current_user.id
     @post = current_user.posts.build
   end
 

@@ -6,7 +6,7 @@
       <% if user_signed_in? %>
 	      <%= link_to 'Edit', edit_admin_post_path(@post) %>
 	      <%= link_to 'Destroy', admin_post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %>
-	   <% end %> 
+	    <% end %> 
     </smal>
   </section>
 
@@ -14,5 +14,30 @@
   	<%= image_tag @post.image.url(:large), class: 'img-show' if @post.image? %>
     <%= @post.body.html_safe %>
   </section>
+  <br>
+  <h2>Comments</h2>
+
+  <% @post.comments.each do |comment| %>
+    <time><%= @post.created_at.to_date.strftime("%d, %B, %Y") %></time>
+      <% if user_signed_in? %>
+      <%= link_to 'Destroy', post_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %> 
+    <p><strong><%= comment.email %></strong>: <%= comment.body %></p>
+    <br>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <%= form_for([@post, @post.comments.build]) do |comment| %>
+      
+      <p class="form-group">
+        <%= comment.text_field :body, class: 'form-control' %>
+      </p>
+
+      <p class="form-group">
+        <%= comment.submit 'add comment', class: 'btn btn-primary'%>
+      </p>
+    <% end %>
+  <% end %>
+
 </article>
 <br>
