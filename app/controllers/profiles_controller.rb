@@ -1,7 +1,13 @@
 class ProfilesController < ApplicationController
   before_action :set_user
 
-  def show; end
+  def show
+  	@posts = Post.where(user_id: current_user.id)
+  	@my_mmr = 0
+  	@posts.each do |post|
+  		@my_mmr = @my_mmr + post.likes.count
+  	end
+  end
 
   private
 
