@@ -11,7 +11,7 @@
 
   <body>
     <div class="container" style="border-bottom: 2px solid blue; background-color: #F5F5F5">
-
+      
       <h1 class="navbar-brand" href="#">VebBlog</h1>
       <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
 
@@ -21,25 +21,30 @@
           </li>
           <li class="nav-item active">
             <% if user_signed_in? %>
-              <%= link_to 'new article', new_admin_post_path, class: 'btn btn-outline-primary pull-sm' %>
+              <%= link_to 'new article', new_post_path, class: 'btn btn-outline-primary pull-sm' %>
             <% end %>
           </li>
         </ul>
 
         <ul class="navbar-nav pull-xs-right">
           <% if user_signed_in? %>
+            <% if current_user.admin? %>
+              <li class="nav-item">
+                <%= link_to "admin", profile_path(current_user.id) %>
+              </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to current_user.email, profile_path(current_user.id) %>
             </li>
             <li class="nav-item">
-              <%= link_to "Выход", destroy_user_session_path, method: :delete, class: "nav-link" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
             </li>
           <% else %>
             <li class="nav-item">
-              <%= link_to "Вход", new_user_session_path, class: "nav-link" %>
+              <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Регистрация", new_user_registration_path, class: "nav-link" %>
+              <%= link_to "Sign in", new_user_registration_path, class: "nav-link" %>
             </li>
           <% end %>
         </ul>

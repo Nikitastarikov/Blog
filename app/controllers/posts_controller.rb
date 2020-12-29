@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy like dislike]
 
   def index
     @posts = Post.all
@@ -11,6 +11,38 @@ class PostsController < ApplicationController
     @post = current_user.posts.build
   end
 
+  def like
+  #  if current_user.likes.exists?(post_id: @post.id)
+  #    redirect_to post_path(@post), notice: "вы уже лайкнули этот пост"
+  #  else
+
+  #    @like_post = current_user.likes.build
+  #    @like_post.post_id = @post.id
+  #    @like_post.save
+  #    @temp = (@post.count_like).to_int 
+  #    @temp += 1
+  #    if @like_post.save 
+  #      @post.update(count_like: @temp)
+  #      redirect_to post_path(@post), notice: "like"
+  #    end
+
+  #  end
+  end
+
+  def dislike
+  #  if current_user.likes.exists?(post_id: @post.id)
+  #    @like_post = current_user.likes.find_by_post_id(@post.id)
+  #    @like_post.destroy
+  #    @temp = (@post.count_like.to_int
+  #    @temp -= 1
+  #    @post.update(count_like: @temp)
+  #    redirect_to post_path(@post), notice: "dislike"
+
+  #  else
+  #    redirect_to post_path(@post), notice: "вы не лайкали этот пост"
+  #  end
+  end
+
   # GET /posts/1/edit
   def edit; end
 
@@ -18,6 +50,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = current_user.posts.build(post_params)
+    @post.update(count_like: 0)
 
     respond_to do |format|
       if @post.update(post_params)
@@ -50,10 +83,6 @@ class PostsController < ApplicationController
   # DELETE /posts/1.json
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { head :no_content }
-    end
     redirect_to root_path
   end
 
@@ -62,10 +91,11 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+    @user = current_user
   end
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :summary, :body, :image, :user_id)
+    params.require(:post).permit(:title, :summary, :body, :image, :user_id, :count_like)
   end
 end

@@ -3,13 +3,12 @@ Rails.application.routes.draw do
 
   root 'posts#index'
   get '/profiles/:id' => 'profiles#show', as: 'profile'
-  # get 'comments#destroy', as: "comment_destroy"
 
   resources :posts do
+  	resources :likes
     resources :comments
   end
+  #get '/posts/:id/like' => 'posts#like', as: 'like_post'
+  #get '/posts/:id/dislike' => 'posts#dislike', as: 'dislike_post'
 
-  namespace :admin do
-    resources :posts, except: %i[show index]
-  end
 end
