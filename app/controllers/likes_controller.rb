@@ -13,18 +13,23 @@ class LikesController < ApplicationController
 
   def create
   	@like = @post.likes.new(:user_id => current_user.id)
-
+		@post.update(count_like: @post.likes.count)
   	if @like.save
   		redirect_to post_path(@post), success: 'like'
   	else
   		redirect_to post_path(@post), success: 'не получилось'
   	end
+  	
+  	
+
   end
 
   private
 
   def set_like
   	@post = Post.find(params[:post_id])
+  	@post.update(count_like: @post.likes.count)
+  	@post.save
   end
 
   def like_params

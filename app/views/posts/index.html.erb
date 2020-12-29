@@ -3,7 +3,7 @@
 <h1>Posts</h1>
 
 <section id='posts'>
-	<%= render @posts %>
+	<%= render @posts.order(updated_at: :desc) %>
 </section>
 
 
