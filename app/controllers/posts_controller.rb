@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[show edit update destroy like dislike]
+  before_action :set_post, only: %i[show edit update destroy]
 
   def index
     @posts = Post.all
@@ -9,38 +9,6 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.build
-  end
-
-  def like
-  #  if current_user.likes.exists?(post_id: @post.id)
-  #    redirect_to post_path(@post), notice: "вы уже лайкнули этот пост"
-  #  else
-
-  #    @like_post = current_user.likes.build
-  #    @like_post.post_id = @post.id
-  #    @like_post.save
-  #    @temp = (@post.count_like).to_int 
-  #    @temp += 1
-  #    if @like_post.save 
-  #      @post.update(count_like: @temp)
-  #      redirect_to post_path(@post), notice: "like"
-  #    end
-
-  #  end
-  end
-
-  def dislike
-  #  if current_user.likes.exists?(post_id: @post.id)
-  #    @like_post = current_user.likes.find_by_post_id(@post.id)
-  #    @like_post.destroy
-  #    @temp = (@post.count_like.to_int
-  #    @temp -= 1
-  #    @post.update(count_like: @temp)
-  #    redirect_to post_path(@post), notice: "dislike"
-
-  #  else
-  #    redirect_to post_path(@post), notice: "вы не лайкали этот пост"
-  #  end
   end
 
   # GET /posts/1/edit

@@ -7,15 +7,20 @@ class CommentsController < ApplicationController
       @comment.destroy
       redirect_to post_path, success: 'comment delete'
     else
-      redirect_to post_path, notice: 'коммента нет'
+      redirect_to post_path, notice: 'comment not exists'
     end
   end
-   
+
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.create(comment_params)
-    @comment.update(email: current_user.email)
-    redirect_to post_path(@post)
+    @comment = @post.comments.new(comment_params)
+    @comment.email = current_user.email
+
+    if @comment.save
+      redirect_to post_path(@post), success: 'comment created'
+    else
+      redirect_to post_path(@post), error: "comment don't created"
+    end
   end
 
   private
