@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_29_143924) do
+ActiveRecord::Schema.define(version: 2021_01_05_065345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2020_12_29_143924) do
     t.string "image"
     t.integer "user_id"
     t.integer "count_like"
+    t.boolean "draft"
     t.index ["count_like"], name: "index_posts_on_count_like"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

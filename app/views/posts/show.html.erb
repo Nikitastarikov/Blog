@@ -16,7 +16,6 @@
   </section>
   <br>
 
-
   <% if user_signed_in? %>
       <%= form_for([@post, @post.likes.build]) do |like| %>
         <% if !@post.likes.exists?(user_id: current_user.id) %>

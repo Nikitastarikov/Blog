@@ -31,7 +31,15 @@
   </div>
 
   <div class="form-group">
-    <%= f.submit 'Save', class: 'btn btn-primary'%>
+    <%= f.label 'to publish?' %><br/>
+    <%= f.label :draft, "Yes", :value => "false" %>
+    <%= f.radio_button :draft, true %>
+    <%= f.label :draft, "No", :value => "true" %>
+    <%= f.radio_button :draft, false, :checked => true%>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit 'Save', class: 'btn btn-primary' %>
     <%= link_to 'Back', :back, class: 'btn btn-outline-secondary' %>
   </div>
 <% end %>

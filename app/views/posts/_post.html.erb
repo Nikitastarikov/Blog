@@ -1,18 +1,23 @@
-<article class="post">
-  <section class="post-head">
-    <h2><%= link_to post.title, post_path(post) %></h2>
-    <smal>
-      <time><%= post.created_at.to_date.strftime("%d, %B, %Y") %></time>
-      <% if user_signed_in? && (current_user.admin? || current_user.id == post.user_id) %>
-        <%= link_to 'Edit', edit_post_path(post) %>
-        <%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %> 
-      <% end %>
-    </smal>
-  </section>
+<% if (user_signed_in? && !post.draft && post.user_id == current_user.id) || post.draft %>
+  <article class="post">
+    <section class="post-head">
+      <h2><%= link_to post.title, post_path(post) %></h2>
+      <smal>
+        <time><%= post.created_at.to_date.strftime("%d, %B, %Y") %></time>
+        <% if user_signed_in? && (current_user.admin? || current_user.id == post.user_id) %>
+          <%= link_to 'Edit', edit_post_path(post) %>
+          <%= link_to 'Destroy', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %> 
+        <% end %>
+        <% if !post.draft %>
+          draft
+        <% end %>
+      </smal>
+    </section>
 
-  <section class="post-summary clearfix">
-    <%= image_tag post.image.url(:thumb), class: 'img-thumbnail thumb' if post.image? %>
-    <%= post.summary %>
-  </section>
-</article>
-<br>
+    <section class="post-summary clearfix">
+      <%= image_tag post.image.url(:thumb), class: 'img-thumbnail thumb' if post.image? %>
+      <%= post.summary %>
+    </section>
+  </article>
+  <br>
+<% end %>

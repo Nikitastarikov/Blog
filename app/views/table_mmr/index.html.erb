@@ -1,0 +1,3 @@
+<h2>Table mmr</h2>
+
+<%= render 'user', users: @users.joins(:posts).group('users.id').order('SUM(count_like) desc') %>
