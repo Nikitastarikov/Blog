@@ -5,7 +5,9 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
-  def show; end
+  def show
+    @user_owner = User.find(@post.user_id)
+  end
 
   def new
     @post = current_user.posts.build
@@ -17,24 +19,18 @@ class PostsController < ApplicationController
     @post = current_user.posts.build(post_params)
     @post.update(count_like: 0)
 
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, success: 'Article updated successfully' }
-      else
-        flash.now[:danger] = 'The article has not been updated'
-        format.html { render :new }
-      end
+    if @post.update(post_params)
+      redirect_to @post, success: 'Article updated successfully'
+    else
+      render :new, error: 'The article has not been updated'
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, success: 'Article updated successfully' }
-      else
-        flash.now[:danger] = 'The article has not been updated'
-        format.html { render :edit }
-      end
+    if @post.update(post_params)
+      redirect_to @post, success: 'Article updated successfully'
+    else
+      render :edit, error: 'The article has not been updated'
     end
   end
 

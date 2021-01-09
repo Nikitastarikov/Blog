@@ -1,7 +1,7 @@
 <article class="post">
   <section class="post-head">
     <% users.each do |user| %>
-		<h2><%= link_to user.email, profile_path(user.id)  %> </h2>
+		<h2><%= link_to user.email, profile_path(user.id) %><% if user.rank == 2 %> admin<% elsif user.rank == 1 %> moderator <% end %> </h2>
 		<% temp = 0 %>
 		<% user.posts.each do |post| %>
 			<% temp += post.likes.count %>

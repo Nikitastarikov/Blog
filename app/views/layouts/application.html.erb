@@ -28,9 +28,13 @@
 
         <ul class="navbar-nav pull-xs-right">
           <% if user_signed_in? %>
-            <% if current_user.admin? %>
+            <% if current_user.rank == 2 %>
               <li class="nav-item">
                 <%= link_to "admin", profile_path(current_user.id) %>
+              </li>
+            <% elsif current_user.rank == 1 %>
+              <li class="nav-item">
+                <%= link_to "moderator", profile_path(current_user.id) %>
               </li>
             <% end %>
             <li class="nav-item">
