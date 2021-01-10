@@ -37,6 +37,26 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def ban
+    return unless user_signed_in?
+
+    @seconds = 3600 * 24 * 30
+    @time_zone = Time.zone.at(Time.zone.now + Time.zone.at(@seconds))
+    @user.update(ban: @time_zone)
+    @user.ban = @time_zone
+    @user.save
+    redirect_to profile_path(@user.id), success: "success, the user:#{@user.email} received a ban until #{@user.ban}"
+  end
+
+  def unban
+    return unless user_signed_in?
+
+    @user.update(ban: Time.zone.now)
+    @user.ban = Time.zone.now
+    @user.save
+    redirect_to profile_path(@user.id), success: "success, the user:#{@user.email} is unban"
+  end 
+
   private
 
   def set_user
