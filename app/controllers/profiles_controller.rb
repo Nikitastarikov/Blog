@@ -51,8 +51,8 @@ class ProfilesController < ApplicationController
   def unban
     return unless user_signed_in?
 
-    @user.update(ban: Time.zone.now)
-    @user.ban = Time.zone.now
+    @user.update(ban: nil)
+    @user.ban = nil
     @user.save
     redirect_to profile_path(@user.id), success: "success, the user:#{@user.email} is unban"
   end 

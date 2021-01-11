@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_094335) do
     t.string "image"
     t.integer "user_id"
     t.integer "count_like"
-    t.boolean "draft"
+    t.boolean "draft", default: false
     t.index ["count_like"], name: "index_posts_on_count_like"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end

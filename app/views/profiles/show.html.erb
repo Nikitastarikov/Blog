@@ -15,8 +15,6 @@
 			</ul>
 		<% end %>
 	<% end %>
-	Ban = <%= @user.ban %><br>
-	Today = <%= Time.zone.now %>
 	<% if current_user.rank == 2 && @user.rank != 2 %>
 		<% if !@user.ban || @user.ban <= Time.zone.now %>
 			<ul class="navbar-nav pull-xs-right">
