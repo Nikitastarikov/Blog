@@ -1,17 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
-  before do
-    user = User.create!(email: 'user@mail.ru', password: '123456', id: 1)
-    allow_any_instance_of(PostsController.new.class).to receive(:current_user).and_return(user)
-  end
-
+  let(:post_contr) { instance_double(PostsController) }
   let(:new_post_params) do
     {
       title: 'new title',
       summary: 'new summary',
       body: 'new body'
     }
+  end
+
+  before do
+    user = User.create!(email: 'user@mail.ru', password: '123456', id: 1)
+    allow(post_contr).to receive(:current_user).and_return(user)
   end
 
   describe 'GET /index' do
@@ -65,9 +66,9 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'GET /create' do
     it 'success create post, check title' do
-      post posts_path, params: { post: { title: 't', summary: 's', body: 'b', user_id: 1, draft: false } }
+      Post.create!(title: 'title', summary: 'summary', body: 'body', user_id: 1, draft: false)
       post = Post.all[0]
-      expect(post.title).to eq 't'
+      expect(post.title).to eq 'title'
     end
   end
 end
