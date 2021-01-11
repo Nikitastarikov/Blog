@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   def edit; end
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.posts.create(post_params)
     @post.update(count_like: 0)
 
     if @post.update(post_params)
