@@ -16,9 +16,9 @@ class LikesController < ApplicationController
     @like = @post.likes.new(user_id: current_user.id)
     count_like
     if @like.save
-      redirect_to post_path(@post), success: 'like'
+      redirect_to post_path(@post), notice: 'like'
     else
-      redirect_to post_path(@post), success: 'like error'
+      redirect_to post_path(@post), notice: 'like error'
     end
   end
 
@@ -26,7 +26,6 @@ class LikesController < ApplicationController
 
   def set_like
     @post = Post.find(params[:post_id])
-    # @post.save
   end
 
   def count_like

@@ -44,7 +44,7 @@
 
       <% @post.comments.each do |comment| %>
         <time><%= @post.created_at.to_date.strftime("%d, %B, %Y") %></time>
-          <% if user_signed_in? && (current_user.rank == 2 || current_user.email == comment.email || (current_user.rank == 1 && @user_owner.rank != 0)) %>
+          <% if user_signed_in? && (current_user.rank == 2 || current_user.email == comment.email || (current_user.rank == 1 && @user_owner.rank == 0)) %>
             <%= link_to 'Destroy', post_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end %> 
         <p><strong><%= comment.email %></strong>: <%= comment.body %></p>

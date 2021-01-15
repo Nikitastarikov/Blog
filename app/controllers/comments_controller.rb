@@ -1,11 +1,10 @@
 class CommentsController < ApplicationController
-  # before_action :set_post, only: %i[create destroy]
 
   def destroy
     @comment = Comment.find(params[:post_id])
     if @comment.present?
       @comment.destroy
-      redirect_to post_path, success: 'comment delete'
+      redirect_to post_path, notice: 'comment delete'
     else
       redirect_to post_path, notice: 'comment not exists'
     end
@@ -17,9 +16,9 @@ class CommentsController < ApplicationController
     @comment.email = current_user.email
 
     if @comment.save
-      redirect_to post_path(@post), success: 'comment created'
+      redirect_to post_path(@post), notice: 'comment created'
     else
-      redirect_to post_path(@post), error: "comment don't created"
+      redirect_to post_path(@post), notice: "comment don't created"
     end
   end
 
