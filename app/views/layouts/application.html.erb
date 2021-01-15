@@ -30,18 +30,18 @@
           <% if user_signed_in? %>
             <% if current_user.rank == 2 %>
               <li class="nav-item">
-                <%= link_to "admin", profile_path(current_user.id) %>
+                <%= link_to "Admin", profile_path(current_user.id) %>
               </li>
             <% elsif current_user.rank == 1 %>
               <li class="nav-item">
-                <%= link_to "moderator", profile_path(current_user.id) %>
+                <%= link_to "Moderator", profile_path(current_user.id) %>
               </li>
             <% end %>
             <li class="nav-item">
               <%= link_to current_user.email, profile_path(current_user.id) %>
             </li>
             <li class="nav-item">
-              <%= link_to "table mmr", table_mmr_path(current_user.id), class: "nav-link" %>
+              <%= link_to "Table mmr", table_mmr_path(current_user.id), class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
