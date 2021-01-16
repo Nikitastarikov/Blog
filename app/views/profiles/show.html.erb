@@ -15,21 +15,7 @@
 			</ul>
 		<% end %>
 	<% end %>
-	<% if current_user.rank == 2 && @user.rank != 2 %>
-		<% if !@user.ban || @user.ban <= Time.zone.now %>
-			<ul class="navbar-nav pull-xs-right">
-				<li class="nav-item">
-					<%= link_to 'ban', ban_path(@user.id) %>
-				</li>
-			</ul>
-		<% else %>
-			<ul class="navbar-nav pull-xs-right">
-				<li class="nav-item">
-					<%= link_to 'disban', unban_path(@user.id) %>
-				</li>
-			</ul>
-		<% end %>
-	<% elsif current_user.rank == 1 && @user.rank == 0 %>
+	<% if current_user.rank == 2 && @user.rank != 2 || current_user.rank == 1 && @user.rank == 0%>
 		<% if !@user.ban || @user.ban <= Time.zone.now %>
 			<ul class="navbar-nav pull-xs-right">
 				<li class="nav-item">

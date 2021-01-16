@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def destroy
     @comment = Comment.find(params[:post_id])
     if @comment.present?
